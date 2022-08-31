@@ -1,0 +1,54 @@
+Modelo descontinuo
+proj ou modelo descritivo der/mer()
+
+modelo/diagrama(entidade e relacionamento)
+
+gradu do relacionaemento: mostra as quantiadades de entidades ligadas ao relacionamento
+
+autirel: (é usado para ele mesmo )diminuir a quantidade de entidades(performance e diminuiçao)
+
+binario: uma entidade ligada a outra entidade
+
+ternario: oq mais existe(de forma profissional)
+
+retanguo = entidades
+losangulo = relacionamento
+
+card minima: implementa em prog, regras(validaçao)
+
+card maxima: valor maximo de troca de dados entre entidades
+
+1 para 1(uma ocorrencia de entidaes esta ligada a uma ocorrencia do lado B(qualquer lado))
+
+1 para 1 depende da regra da situaçao(tendo a segurança do sistema)
+
+casamento: homem << casa >> mulher(modelo antigo)
+
+modelo novo: pessoa casa com pessoa(1 para 1)
+
+ocorrencia(dados dentro do banco de dados)
+
+
+OUTRA PARTE
+
+1p/n ou np/1 (uma ocorrencia de entidaes esta ligada a muitas ocorrencia do lado B(qualquer lado))
+
+Ex: (1)cliente possui pedido(muitos)
+    cliente_1	   1 ou muitos	 			
+    cliente_2      2 ou muitos
+
+
+
+
+
+Np/n ou np/n: (muitas ocorrencia de entidaes esta ligada a muitas ocorrencia do lado B(qualquer lado))
+
+
+
+
+
+		
+	    	
+
+
+		 
