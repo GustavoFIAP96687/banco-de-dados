@@ -1,0 +1,5 @@
+Atributo: identificador (para agora)
+Atributo composto: reunir mais de um tema para gerrar uma informação
+Atributo monovalorado: um valor
+atributo multivalorado: mais de um valor
+Atributo derivado: nao preenchido resultado de um processamento EX: saldo em conta
