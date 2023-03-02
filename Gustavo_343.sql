@@ -1,6 +1,6 @@
--- introduÁ„o a lingugagem SQL
+-- introduÔøΩÔøΩo a lingugagem SQL
 
--- DDL - Linguagem de definiÁ„o de dados
+-- DDL - Linguagem de definiÔøΩÔøΩo de dados
 
 -- Criando tabelas 
 --Sintaxe:
@@ -24,8 +24,8 @@ Pk - primary key, campo unico, preenchimento obrigatorio, relacionamento
 FK - foreign key, relacionamento lado n da cardinalidade, recebe dados
     previamente cadastrados na Pk
 Nn - not null, campo de preenchimento obrigatorio
-Uk - unique, campo com restriÁ„o de dados repetidos
-Ck - check, capo com lista de dados  para validaÁ„o
+Uk - unique, campo com restriÔøΩÔøΩo de dados repetidos
+Ck - check, capo com lista de dados  para validaÔøΩÔøΩo
 
 Exemplificando
 
@@ -42,7 +42,7 @@ deletando uma tabela
 drop table nome_tabela
 exemplo: drop table cargo10
 
-2- criando uma tabela com regras, sem personalizaÁ„o:
+2- criando uma tabela com regras, sem personalizaÔøΩÔøΩo:
 create table cargo10
 (cd_cargo number(3) primary key,
 nm_cargo varchar2(25) not null unique,
@@ -54,7 +54,7 @@ visualizando constraints
 select constraint_name, constraint_type from user_constraints
 where table_name = 'CARGO10'
 
-3- criando uma tabela com regras, com personalizaÁ„o:
+3- criando uma tabela com regras, com personalizaÔøΩÔøΩo:
 drop table cargo10
 
 create table cargo10
@@ -73,7 +73,7 @@ criando o relacionamento
 
 1 - 1 - pk + FK_Uk
 1 - N - pk + FK
-N - N - n„o existe em codigo sql
+N - N - nÔøΩo existe em codigo sql
 
 desc cargo10
 create table funcionario10
@@ -92,7 +92,113 @@ dt_adm date constraint fun_dt_nn not null,
 uf_fun char(2) constraint fun_uf_nn not null,
 cargo_fk references cargo10)
 
-CriaÁ„o de tabelas: n_fiscal e produto
+CriaÔøΩÔøΩo de tabelas: n_fiscal e produto
+
+Aula 03 01/03/2023
+
+Alterando ou corrigindo uma estrutura
+alter table nome_tabela
+op√ß√µes
+add column      - nova coluna
+add constraint  - nova regra
+modify          - modifica tipo e/ou tamanho de uma coluna
+drop column     - elimina coluna
+drop constraint - elimina
+
+create table tb_teste
+(codigo number(2),
+nome number(10));
+
+incluindo uma nova coluna
+alter table tb_teste add dt_nasc date
+
+incluindo uma coluna com regra
+alter table tb_teste add cep char(8)not null
+
+incluindo a pk na coluna codigo
+alter table tb_teste add constraint pk_codigo primary key (codigo)
+
+modificando apenas o tipo de dados
+alter table tb_teste modify nome varchar(10
+
+modificando apenas os tamanhos da colunas
+alter table tb_teste modify nome varchar(50)
+
+modificando tamanho e tipo ao mesmo tempo
+alter table tb_teste modify nome number(10)
+
+eliminando uma regra
+alter table tb_teste drop constraint pk_codigo 
+desc tb_teste
+desc user_constraints
+
+select constraint_name from user_constraints where table_name = 'TB_TESTE'
+
+eliminando uma coluna
+alter table tb_teste drop column nome
+
+renomeando coluna
+alter table tb_teste rename column codigo to cod_cliente
+
+alter table tb_teste rename constraint sys_C003509439 to fiap
+desc tb_teste
+
+eliminadno uma tabela 
+drop table nome_tabela
+drop table tb_teste
+
+select * from funcionario
+
+create table tb_teste1
+(codigo number(1) primary key)
+
+create table tb_teste2
+(codigo number(1) references tb_teste1)
+
+insert into tb_teste1 values(1)
+insert into tb_teste2 values(1)
+
+drop table tb_teste1 cascade constraints
+uso do cascade permite eliminar o relacionamento e depois dropar a tabela
+
+Atualizando dados
+
+update
+
+operadores: aritmeticos: + - * / ()
+            relacionais: > >= < <= != ou <>
+            logicos: and or not
+            
+update nome_tablea set nome_coluna = novo_valor
+
+update nome_tablea set nome_coluna = novo_valor
+where condi√ß√£o
 
 
-    
+create table produto_tb 
+(cod_prod number(4) constraint prod_cod_pk primary key, 
+unidade varchar2(3),descricao varchar2(20),val_unit number(10,2))
+
+ 
+
+insert into produto_tb values ('25','KG','Queijo','0.97');
+insert into produto_tb values ('31','BAR','Chocolate','0.87');
+insert into produto_tb values ('78','L','Vinho','2.00');
+insert into produto_tb values ('22','M','Linho','0.11');
+insert into produto_tb values ('30','SAC','Acucar','0.30');
+insert into produto_tb values ('53','M','Linha','1.80');
+insert into produto_tb values ('13','G','Ouro','6.18');
+insert into produto_tb values ('45','M','Madeira','0.25');
+insert into produto_tb values ('87','M','Cano','1.97');
+insert into produto_tb values ('77','M','Papel','1.05');
+commit;
+
+select * from produto_tb
+
+atualizar em 15% o pre√ßo dos produtos de codigo maior que 30.
+atualizar o nome do produto queijo para queijo de minas
+para os produtos a√ßucar, madeira e linha zerar o seu pre√ßo
+
+update produto_tb set cod_prod = 15
+where cod_prod = 30
+rollback
