@@ -202,3 +202,77 @@ para os produtos açucar, madeira e linha zerar o seu preço
 update produto_tb set cod_prod = 15
 where cod_prod = 30
 rollback
+
+
+15/3/2023
+-- Gabarito abaixo
+
+
+create table cidade (codigo number(4) constraint pk_cid_cd primary key,
+nome varchar(30) constraint nn_cid_nome not null);
+desc cidade -- exibindo estrutura
+insert into cidade values(1, 'São Paulo', 'SP');
+insert into cidade values(2, 'Curitiba', 'CU');
+commit -- validação;
+select * from cidade; -- exibindo dados 
+
+
+create table socio (cpf char(11) constraint pk_soc_cpf primary key,
+nome varchar(20) constraint nn_soc_nome not null,
+datanasc date constraint nn_soc_dtnasc not null,
+rg varchar(15) constraint nn_soc_rg not null,
+cidade number(4) constraint fk_soc_cid references cidade);
+
+desc socio -- exibindo estrutura
+insert into socio values('1111111', 'Joana', '04-may-1997', '11111111111', 1, '111111111', 'F', 10);
+insert into socio values('21111111', 'Caludio', '14-dec-00', '211111111111', 2, '111111111', 'M', 20);
+commit -- validação;
+select * from cidade; -- exibindo dados
+
+alter table cidade add uf char(2) constraint nn_cid_uf not null
+
+alter table socio add (fone varchar(10),
+sexo char(1) constraint nn_soc_sx not null)
+
+alter table socio modify nome varchar(35);
+
+create table setor (codigo number(3) constraint pk_set_cd primary key,
+nome varchar2(30) constraint nm_set_nome not null);
+desc setor
+insert into setor values(10, 'Financeiro');
+insert into setor values(20, 'Informatica');
+commit;
+
+alter table socio add setor number(3)  not null references setor;
+
+create table dependente (socio char(11) not null references socio,
+numero number(4) primary key,
+nome varchar(30) not null,
+datanasc date not null);
+
+insert into dependente values('1111111', 100, 'Gustavo', '26-feb-00');
+insert into dependente values('21111111', 101, 'Mariana', '06-mar-10');
+commit;
+-- exibindo o nome das constraints
+
+select * form cidade;
+select * form socio;
+select * from setor;
+select * from dependente;
+
+
+
+select constraint_name, constraint_type from user_constraints
+where table_name = 'CIDADE'
+
+15/3/2023
+-- Exercicio 2
+
+
+
+                                                                    
+
+
+
+
+
